@@ -1,0 +1,65 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles -%}
+  {{super()}}
+  <style>
+  .ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .closer-top {
+    position: relative;
+    top: -20px;
+  }
+  .closer-top-abit {
+    position: relative;
+    top: -10px;
+  }
+  .label {
+  min-width: 120px ;
+  display: inline-block
+  }
+  .label-fill {
+    display:inline-block;
+    width:99%;
+  }
+  </style>
+{% endblock %}
+
+{% block title %}
+   {% if title %}{{ title }} - CBIR{% else %}Welcome to CBIR{% endif %}
+{% endblock %}
+
+{% block navbar %}
+  <nav class="navbar navbar-inverse ">
+     <div class="navbar-header">
+         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+         </button>
+         <a class="navbar-brand" href="{{ url_for('index') }}">CBIR</a>
+     </div>
+     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+         <ul class="nav navbar-nav">
+             <li><a href="{{ url_for('index') }}">Home</a></li>\
+         </ul>
+     </div>
+  </nav>
+{% endblock %}
+
+{% block content %}
+  {% with messages = get_flashed_messages(with_categories = true) %}
+  {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{% if category == 'error' %}{{ 'danger' }}{% elif category == 'success' %}{{ 'success' }}{% else %}{{ 'info' }}{% endif %}" role="alert">{{ message }}</div>
+      {% endfor %}
+  {% endif %}
+  {% endwith %}
+
+  {# application content needs to be provided in the app_content block #}
+  {% block app_content %}{% endblock %}
+
+{% endblock %}

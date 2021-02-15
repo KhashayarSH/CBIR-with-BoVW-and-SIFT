@@ -1,0 +1,51 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
+<div class="container">
+  <h3>Query Image</h3>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="thumbnail">
+        <img src="{{url_for('static',filename=query_image[0])}}" alt="...">
+        <div class="caption">
+          <h3>{{query_image[1]}}</h3>
+        </div>
+      </div>
+    </div>
+    <h3>Retrieved Images</h3>
+  {% for image in images %}
+    {% if loop.index0 is divisibleby(3) %}
+      <div class="row">
+        {% if loop.index <= loop.length %}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url_for('static',filename=images[loop.index0][0])}}" alt="...">
+              <div class="caption">
+                <h3>{{images[loop.index0][1]}}</h3>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if loop.index+1 <= loop.length %}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url_for('static',filename=images[loop.index0+1][0])}}" alt="...">
+              <div class="caption">
+                <h3>{{images[loop.index0+1][1]}}</h3>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if loop.index+2 <= loop.length %}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url_for('static',filename=images[loop.index0+2][0])}}" alt="...">
+              <div class="caption">
+                <h3>{{images[loop.index0+2][1]}}</h3>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

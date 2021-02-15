@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+  {% if images|length > 0 %}
+  {% include '_image_table.html' %}
+  {% else %}
+  {{ 'No Images Here' }}
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,59 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+
+<div class="container">
+  <h3>Images</h3>
+  {% for image in images %}
+    {% if loop.index0 is divisibleby(3) %}
+      <div class="row">
+        {% if loop.index <= loop.length %}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url_for('static',filename=images[loop.index0][0])}}" alt="...">
+              <div class="caption">
+                <h3>{{images[loop.index0][1]}}</h3>
+                <form action="{{ url_for('image_retrieve') }}" method="post" class="form" role="form">
+                  <div class="hidden">
+                    {{ wtf.form_field(select_image_form.index, value=images[loop.index0][1]) }}
+                  </div>
+                  <p><button type="submit" class="btn btn-primary"  name="feature-button"  value="SIFT">SIFT</button></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if loop.index+1 <= loop.length %}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url_for('static',filename=images[loop.index0+1][0])}}" alt="...">
+              <div class="caption">
+                <h3>{{images[loop.index0+1][1]}}</h3>
+                <form action="{{ url_for('image_retrieve') }}" method="post" class="form" role="form">
+                  <div class="hidden">
+                    {{ wtf.form_field(select_image_form.index, value=images[loop.index0+1][1]) }}
+                  </div>
+                  <p><button type="submit" class="btn btn-primary"  name="feature-button"  value="SIFT">SIFT</button></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        {% if loop.index+2 <= loop.length %}
+          <div class="col-md-4">
+            <div class="thumbnail">
+              <img src="{{url_for('static',filename=images[loop.index0+2][0])}}" alt="...">
+              <div class="caption">
+                <h3>{{images[loop.index0+2][1]}}</h3>
+                <form action="{{ url_for('image_retrieve') }}" method="post" class="form" role="form">
+                  <div class="hidden">
+                    {{ wtf.form_field(select_image_form.index, value=images[loop.index0+2][1]) }}
+                  </div>
+                  <p><button type="submit" class="btn btn-primary"  name="feature-button"  value="SIFT">SIFT</button></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
